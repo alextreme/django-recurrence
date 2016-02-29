@@ -81,3 +81,28 @@ def test_exclusion_rule():
     ]
 
     assert 2 == pattern.count()
+
+
+def test_exclusion_rule_feb29():
+    inclusion_rule = Rule(
+        recurrence.DAILY
+    )
+
+    pattern = Recurrence(
+        dtstart=datetime(2016, 1, 1, 0, 0, 0),
+        dtend=datetime(2017, 1, 1, 0, 0, 0),
+        rrules=[inclusion_rule],
+        exdates = [datetime(2016, 2, 29, 0, 0),]
+    )
+
+    # This works correctly
+    assert pattern.between(datetime(2016, 2, 29, 0, 0), datetime(2016, 2, 29, 23, 59)) == []
+
+    pattern = Recurrence(
+        rrules=[inclusion_rule],
+        exdates = [datetime(2016, 2, 29, 0, 0),]
+    )
+
+    # Without dtstart/dtend this doesn't work: I would expect
+    # Feb 29th to be excluded just as the previous assert
+    assert pattern.between(datetime(2016, 2, 29, 0, 0), datetime(2016, 2, 29, 23, 59)) == []

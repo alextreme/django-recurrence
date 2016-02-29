@@ -90,7 +90,6 @@ def test_exclusion_rule_feb29():
 
     pattern = Recurrence(
         dtstart=datetime(2016, 1, 1, 0, 0, 0),
-        dtend=datetime(2017, 1, 1, 0, 0, 0),
         rrules=[inclusion_rule],
         exdates = [datetime(2016, 2, 29, 0, 0),]
     )

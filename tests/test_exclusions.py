@@ -102,6 +102,6 @@ def test_exclusion_rule_feb29():
         exdates = [datetime(2016, 2, 29, 0, 0),]
     )
 
-    # Without dtstart/dtend this doesn't work: I would expect
+    # Without dtstart this doesn't work: I would expect
     # Feb 29th to be excluded just as the previous assert
     assert pattern.between(datetime(2016, 2, 29, 0, 0), datetime(2016, 2, 29, 23, 59)) == []
